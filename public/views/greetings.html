@@ -1,0 +1,39 @@
+<section id = "greeting">
+
+	<div id="intro">
+		<h1>Send Greeting</h1>
+		<p> Send your wishes to the couple in just three simple steps :</p>
+	</div>
+
+	<div id = "step1">
+		<h3> Step 1 : Enter your name : </h3>
+		<input ng-model = "sender" placeholder="Enter your name here..." />
+	</div>
+
+	<div id = "step2">
+		<h3> Step 2 : Choose a greeting card : </h3>
+		<div id="greeting">
+			<input type="radio" name="gcard" id="greeting1" ng-model = "card" value="greeting1"/>
+        <label for="greeting1"><img src="../images/greeting1.jpg" alt="card 1" /></label>
+    <input type="radio" name="gcard" id="greeting2" ng-model = "card" value="greeting2"/>
+        <label for="greeting2"><img src="../images/greeting2.jpg" alt="card 2" /></label>
+
+    <input type="radio" name="gcard" id="greeting3" ng-model = "card" value="greeting3"/>
+        <label for="greeting3"><img src="../images/greeting3.jpg" alt="card 3" /></label>
+		</div>
+	</div>
+
+	<div id = "step3">
+		<h3> Step 2 : Enter your message : </h3>
+		<textarea ng-model="message" rows="10" cols="30" placeholder = "Enter your message here">
+		</textarea>
+	</div>
+
+	<button id="send" class="btn btn-primary" ng-click="sendGreeting(sender, message, card)"> Send </button>
+
+	<div id="menu">
+		<a class="btn btn-primary" role="button" ng-click="go('/')">Home</a>
+		<a class="btn btn-primary" role="button" ng-click="go('/gallery')">Gallery</a>
+	</div>
+
+</section>

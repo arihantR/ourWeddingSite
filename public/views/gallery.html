@@ -1,0 +1,13 @@
+<div>
+	<h3>Welocome to our Gallery</h3>
+	<ul>
+		<li ng-repeat="wish in wishes" ng-show="(path ==='/gallery/admin' || wish.shouldDisplay)">
+			<div style = "background-image: url('../images/{{wish.card}}.jpg')"> {{wish.message}} </div>
+			<h4> by {{wish.sender}}
+			<button ng-show = "path ==='/gallery/admin' && !wish.shouldDisplay" ng-click="displayWish(wish)"> Publish </button>
+			<button ng-show = "path ==='/gallery/admin' && wish.shouldDisplay" disabled> Published </button>
+		</li>
+	</ul>
+	<a class="btn btn-primary" role="button" ng-click="go('/')">Home</a>
+	<a class="btn btn-primary" role="button" ng-click="go('/sendGreeting')">Send Greeting</a>
+</div>
