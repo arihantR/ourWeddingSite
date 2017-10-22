@@ -1,39 +1,53 @@
-<section id = "greeting">
-
-	<div id="intro">
+<section>
+	<div class="container">
+	<div id="intro" class="row text-center">
 		<h1>Send Greeting</h1>
 		<p> Send your wishes to the couple in just three simple steps :</p>
 	</div>
-
-	<div id = "step1">
-		<h3> Step 1 : Enter your name : </h3>
-		<input ng-model = "sender" placeholder="Enter your name here..." />
-	</div>
-
-	<div id = "step2">
-		<h3> Step 2 : Choose a greeting card : </h3>
+	<form id="greetingForm">
+	<div class="row">
+		<h3> Step 1 - Choose a greeting card : </h3>
 		<div id="greeting">
-			<input type="radio" name="gcard" id="greeting1" ng-model = "card" value="greeting1"/>
-        <label for="greeting1"><img src="../images/greeting1.jpg" alt="card 1" /></label>
-    <input type="radio" name="gcard" id="greeting2" ng-model = "card" value="greeting2"/>
-        <label for="greeting2"><img src="../images/greeting2.jpg" alt="card 2" /></label>
-
-    <input type="radio" name="gcard" id="greeting3" ng-model = "card" value="greeting3"/>
-        <label for="greeting3"><img src="../images/greeting3.jpg" alt="card 3" /></label>
+			<input type="radio" name="gcard" id="greeting1" ng-model = "card" value="greeting1" required/>
+        <label for="greeting1"><img class="img-responsive" src="../images/greeting1.jpg" alt="card 1" /></label>
+			<input type="radio" name="gcard" id="greeting2" ng-model = "card" value="greeting2" required/>
+					<label for="greeting2"><img class="img-responsive" src="../images/greeting2.jpg" alt="card 2" /></label>
+			<input type="radio" name="gcard" id="greeting3" ng-model = "card" value="greeting3" required/>
+					<label for="greeting3"><img class="img-responsive" src="../images/greeting3.jpg" alt="card 3" /></label>
 		</div>
+		<span ng-show="greetingForm.gcard.$touched && greetingForm.gcard.$invalid">Please choose a card.</span>
 	</div>
 
-	<div id = "step3">
-		<h3> Step 2 : Enter your message : </h3>
-		<textarea ng-model="message" rows="10" cols="30" placeholder = "Enter your message here">
-		</textarea>
+
+	<div class="row">
+		<h3> Step 2 - Enter your message : </h3>
+		<textarea name="message" ng-model="message" rows="10" cols="30" placeholder = "Enter your message here" required> </textarea>
+		<span ng-show="greetingForm.message.$touched && greetingForm.message.$invalid">Please enter a message.</span>
 	</div>
 
-	<button id="send" class="btn btn-primary" ng-click="sendGreeting(sender, message, card)"> Send </button>
+	<div id = "step3" class="row">
+		<h3> Step 3 - Enter your name : </h3>
+		<input name="sender" ng-model = "sender" placeholder="Enter your name here..." required />
+		<span ng-show="greetingForm.sender.$touched && greetingForm.sender.$invalid">Please enter your name.</span>
+	</div>
 
-	<div id="menu">
+	<div class="row" id="sendGreeting">
+		<div ng-show="showSuccess">
+			<p> Greeting sent. Your wishes will be published on our gallery in 0 to 30 mins ~ Thank you... </p>
+		</div>
+		<button id="send" class="btn btn-primary" ng-click="sendGreeting(sender, message, card)"> Send </button>
+
+	</div>
+	</form>
+	<div class="row text-center" id="menu">
 		<a class="btn btn-primary" role="button" ng-click="go('/')">Home</a>
 		<a class="btn btn-primary" role="button" ng-click="go('/gallery')">Gallery</a>
 	</div>
 
+	<div class="row" id="footer">
+		<p> We look forward to your blessings and best wishes. Enlighten us by your presence </p>
+		<h6> ~ Arihant & Pooja </h6>
+	</div>
+
+ </div>
 </section>

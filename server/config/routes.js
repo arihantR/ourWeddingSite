@@ -12,6 +12,7 @@ module.exports = function(app) {
 	//app.post('/login', auth.authenticate);
 	app.post('/sendGreeting', greetings.addGreeting);
 	app.get('/gallery', greetings.getWishes);
+	app.get('/adminGallery', greetings.getWishes);
 	app.put('/gallery', greetings.publishGreeting);
 	app.post('/logout', function(req, res) {
 		req.logout();

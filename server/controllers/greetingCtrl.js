@@ -1,15 +1,18 @@
 var mongoose = require('mongoose');
 var	greetings = mongoose.model('greet');
 
-// exports.getUsers = function(req,res) {
-// 	users.find({}).exec(function(err, collection) {
-// 		res.send(collection);
-// 	});
-// }
 exports.getWishes = function(req,res) {
-	greetings.find({}).exec(function(err, collection) {
-		res.send(collection);
-	});
+	if(req.url === "/gallery") {
+		greetings.find({shouldDisplay: true}).exec(function(err, collection) {
+			res.send(collection);
+		});
+	} else if(req.url === "/adminGallery") {
+		greetings.find({shouldDisplay: false}).exec(function(err, collection) {
+			res.send(collection);
+		});
+	} else {
+		//donothing
+	}
 }
 exports.addGreeting = function(req, res, next) {
 	console.log('Inside add greeting');

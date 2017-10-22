@@ -1,4 +1,4 @@
-angular.module('myApp').factory('greetings', function($http, $q, $sessionStorage, greetingMsg) {
+angular.module('myApp').factory('greetings', function($http, $q, $sessionStorage, $location, greetingMsg) {
 	return {
 
 		sendGreeting: function(msg) {
@@ -17,7 +17,8 @@ angular.module('myApp').factory('greetings', function($http, $q, $sessionStorage
 			console.log("retrieving your msg");
 			//var greetingCard =  new greetingMsg();
 			var dfd = $q.defer();
-			$http.get('/gallery').then(function(response){
+			var path = $location.path();
+			$http.get(path).then(function(response){
 				//userIdentifier.currentUser = newUser;
 				console.log("msg fetched - " + response);
 				dfd.resolve(response);

@@ -1,11 +1,50 @@
+<section>
+	<div class = "container" >
+		<div class="row" >
+			<!-- style="background-image: url(../images/we.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;" -->
+			 <img class="img-responsive" src="../images/we.jpg" alt="our cover pic"/>
+			 <audio id="player" autoplay loop>
+				<source src="../images/onLoad.wav" type="audio/wav">
+				Your browser does not support the audio element.
+			</audio>
+			<div>
+					<button onclick="document.getElementById('player').muted=!document.getElementById('player').muted">
+						<span class="glyphicon glyphicon-volume-off"></span></button>
+			</div>
+			<div class="text-center">
+				<h2 class="marryText ">We're getting married</h2>
+				<h1 class="names ">Arihant & Pooja</h1>
+				<h3 class="dateText ">on November 12th 2017, Indore</h3>
+			</div>
+
+		</div>
+		<div class="row">
+			<div id="countdown">
+
+			</div>
+		</div>
+		<div class="row text-center">
+			<div id="menu">
+				<a class="btn btn-primary" role="button" ng-click="go('/gallery')">Gallery</a>
+				<a class="btn btn-primary" role="button" ng-click="go('/sendGreeting')">Send Greeting</a>
+			</div>
+		</div>
+		<div class="row" id="footer">
+			<p> We look forward to your blessings and best wishes. Enlighten us by your presence </p>
+			<h6> ~ Arihant & Pooja </h6>
+		</div>
+	</div>
+</section>
 <!--<section style="background: url('../images/we.jpg') no-repeat center center fixed; height:500px;">-->
-<section id="home">
+<!--<section id="home">
 	<div>
 		<img class="img-responsive" src="../images/we.jpg" alt="our cover pic" />
-		<!-- <div style="font-family: 'Pacifico', cursive; position: absolute; top:10px; left: 500px; font-size: 26px">
+	  <div style="font-family: 'Pacifico', cursive; position: absolute; top:10px; left: 500px; font-size: 26px">
 			We'are getting married. <br/><br/>
-			<span style: "left:100px;"> Pooja & Arihant</span>
-		</div> -->
+			<span style: "left:100px;"> Arihant & Pooja</span>
+		</div>
 	</div>
 	<div class="container">
 		<div class="row">
@@ -27,58 +66,8 @@
 	<a class="btn btn-primary" role="button" ng-click="go('/sendGreeting')">Send Greeting</a>
 	</div>
 
-	<!-- /.Container Div -->
-	<!--<div class="banner-container">
-		<div class="container">
-			<div class="row">
-				<!--<div class="heading text-center">
-					<h2>We’re getting married.</h2>
-					<h1>Sarah &amp; Samson</h1>
-					<h3>on December 28th 2015, Los Angeles, CA</h3>
-				</div>
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<div id="main">
-						<div id="countdown">
-
-						</div>
-
-					</div>
-
-				</div>
-			</div>
-		</div> -->
 	</div>
 </section>
-<script src="../app/common/timer.js"></script>
+<script src="../app/common/timer.js"></script>-->
 
-
-<!--<h1 ng-show = "identity.isAuthenticated()">Hello {{identity.currentUser.firstName}}</h1>
-<div ng-show = "identity.currentUser.isAdmin()">
-   <h3> You're an Admin. </h3>
-   <div ng-click="go('/admin/users')"> Click to see all users </div>
-   <a href='/admin/users'> Click to see all users </a>
-</div>
-<div ng-show = "identity.isAuthenticated()" ng-click="go('/profile')"> User profile </div>
-<form role = "form" ng-hide = "identity.isAuthenticated()">
-
-   <div class = "form-group" >
-      <label for = "name">username</label>
-      <input type = "text" class = "form-control" id = "name" placeholder = "Enter Name" ng-model="username">
-   </div>
-
-   <div class = "form-group">
-      <label for = "password">password</label>
-      <input type = "password" class = "form-control" id = "password" placeholder = "Enter password" ng-model="password">
-   </div>
-
-   <button type = "submit" class = "btn btn-default" ng-click = "signIn(username,password)">Sign in</button>
-
-</form>
-<div>
-   <button type = "submit" class = "btn btn-default" ng-click = "go('/signup')" ng-hide = "identity.isAuthenticated()">Sign Up
-   </button>
-</div>
-<button type = "submit" class = "btn btn-default" ng-show = "identity.isAuthenticated()" ng-click = "signOut()">
-   Sign Out.
-</button> -->
 

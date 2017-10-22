@@ -1,13 +1,60 @@
-<div>
-	<h3>Welocome to our Gallery</h3>
-	<ul>
-		<li ng-repeat="wish in wishes" ng-show="(path ==='/gallery/admin' || wish.shouldDisplay)">
-			<div style = "background-image: url('../images/{{wish.card}}.jpg')"> {{wish.message}} </div>
-			<h4> by {{wish.sender}}
-			<button ng-show = "path ==='/gallery/admin' && !wish.shouldDisplay" ng-click="displayWish(wish)"> Publish </button>
-			<button ng-show = "path ==='/gallery/admin' && wish.shouldDisplay" disabled> Published </button>
-		</li>
-	</ul>
-	<a class="btn btn-primary" role="button" ng-click="go('/')">Home</a>
-	<a class="btn btn-primary" role="button" ng-click="go('/sendGreeting')">Send Greeting</a>
+<!-- <script>
+$(document).ready(function(){
+    $('#allWishesTable').dataTable();
+}); -->
+</script>
+<div class="container">
+	<div class="row text-center">
+		<h3>Welocome to our Gallery</h3>
+	</div>
+	 <div class="row text-center" ng-hide = "path ==='/adminGallery'">
+		<div id="wishCounter">
+			<h5> {{totalWishes}} </h5>
+			<h6> wishes </h6>
+		</div>
+	</div>
+	<div class="row" id="cards">
+		 <ul>
+			<li ng-repeat="wish in wishes">
+				<div id="card" class="img-responsive" style="background-image: url('../images/{{wish.card}}.jpg');">
+					<div> {{wish.message}} </div>
+					<h6> ~ {{wish.sender}} </h6>
+				</div>
+				<button id="publishButton" ng-show = "path ==='/adminGallery' && !wish.shouldDisplay" ng-click="displayWish(wish)"> Publish </button>
+				<button ng-show = "path ==='/adminGallery' && wish.shouldDisplay" disabled> Published </button>
+				<br/>
+			</li>
+		</ul>
+		<!-- <table id="allWishesTable">
+			<thead>
+        <tr>
+          <th>Your wishes</th>
+        </tr>
+    </thead>
+			<tbody>
+				<tr ng-repeat="wish in wishes" repeatDone>
+					<td>
+						<div id="card" class="img-responsive" style="background-image: url('../images/{{wish.card}}.jpg');">
+							<div> {{wish.message}} </div>
+							<h6> ~ {{wish.sender}} </h6>
+						</div>
+						<button id="publishButton" ng-show = "path ==='/adminGallery' && !wish.shouldDisplay" ng-click="displayWish(wish)"> Publish </button>
+						<button ng-show = "path ==='/adminGallery' && wish.shouldDisplay" disabled> Published </button>
+					</td>
+				</tr>
+			</tbody>
+		</table> -->
+
+	</div>
+
+	<div class="row text-center">
+		<a class="btn btn-primary" role="button" ng-click="go('/')">Home</a>
+		<a class="btn btn-primary" role="button" ng-click="go('/sendGreeting')">Send Greeting</a>
+	</div>
+
+	<div class="row" id="footer">
+		<p> We look forward to your blessings and best wishes. Enlighten us by your presence </p>
+		<h6> ~ Arihant & Pooja </h6>
+	</div>
+
 </div>

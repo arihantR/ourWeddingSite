@@ -1,27 +1,10 @@
 var myApp = angular.module('myApp', ['ngRoute','ngStorage','ngResource']);
 
 myApp.controller('mainController', function($scope, $http, $location) {
-	//$scope.identity = userIdentifier;
 
-	// $scope.signIn = function(username, password) {
-	// 	console.log("Logging in...");
-	// 	userAuth.authenticate(username,password).then(function(success) {
-	// 		if(success) {
-	// 			appNotifier.notify('You are successfully logged in');
-	// 		} else {
-	// 			appNotifier.notify('Failed to login');
-	// 		}
-	// 	});
-	// }
-	// $scope.signOut = function() {
-	// 	userAuth.logoutUser().then(function() {
-	// 		appNotifier.notify('You are successfully logged out');
-	// 		$location.path('/');
-	// 	});
-	// }
 	$scope.go = function(path) {
 		$location.path(path);
-		//$scope.$apply();
+
 	};
 
 	var target_date = new Date('Nov, 12, 2017').getTime();
@@ -58,17 +41,12 @@ setInterval(function () {
 });
 myApp.controller('greetingController', function($scope, greetings, appNotifier, $location) {
 	$scope.geetings = [];
+	$scope.showSuccess = false;
 	$scope.go = function(path) {
 	  $location.path(path);
 	};
 	$scope.sendGreeting = function(sender, messasge, card) {
-		// $http.post('/sendGreeting', {wellwisher: wellwisher}).then(function(response) {
-		// 	if(response.data.success) {
-		// 		appNotifier.notify('Greeting sent');
-		// 	} else {
-		// 		appNotifier.notify('Unable to send message. Please try after some time.');
-		// 	}
-		// });
+
 		var wish = {
 			sender: sender,
 			message: messasge,
@@ -76,21 +54,22 @@ myApp.controller('greetingController', function($scope, greetings, appNotifier, 
 			shouldDisplay: false
 		}
 		greetings.sendGreeting(wish).then(function() {
-			appNotifier.notify('Greeting sent');
+			appNotifier.notify('Greeting sent. Your wishes will be published on our gallery in 0 to 30 mins.');
+			$scope.showSuccess = true;
 		}, function() {
 			appNotifier.notify('Unable to send message. Please try after some time.');
 		});
 	}
 });
 myApp.controller('galleryController', function($scope, greetings, appNotifier, $location) {
-	$scope. path = $location.path();
+	//$('#allWishesTable').dataTable({'bSort': false});
+	$scope.path = $location.path();
 	$scope.go = function(path) {
 	  $location.path(path);
 	};
 	$scope.displayWish = function(wish) {
 		greetings.publishGreeting(wish).then(function(success) {
-
-
+			wish.shouldDisplay = true;
 		}, function(err) {
 			appNotifier.notify("Please try after some time");
 		});
@@ -98,78 +77,25 @@ myApp.controller('galleryController', function($scope, greetings, appNotifier, $
 
 	greetings.fetchWishes().then(function(response) {
 		$scope.wishes = response.data;
+		$scope.totalWishes = response.data.length;
 	}, function() {
 		appNotifier.notify('Unable to retrieve message. Please try after some time.');
 	})
 });
-/*myApp.controller('userListController', function($scope, appUser) {
-	$scope.users = appUser.query();
+myApp.directive('repeatDone', function () {
+    return {
+        link: function(scope, elem, attrs){
+          $('#allWishesTable').DataTable();
+        }
+    };
 });
-
-myApp.controller('signupController', function($scope, userAuth, $location, appNotifier) {
-	$scope.go = function(path) {
-	  $location.path(path);
-	};
-
-	$scope.signup = function() {
-		var newUserData = {
-			userName: $scope.email,
-			password: $scope.password,
-			firstName: $scope.firstName,
-			lastName: $scope.lastName
-		}
-
-		userAuth.createUser(newUserData).then(function() {
-			appNotifier.notify('user account created');
-			$location.path('/');
-		}, function(error) {
-			appNotifier.error(error);
-		})
-	}
-});
-myApp.controller('profileController', function($scope, userAuth, $location, appNotifier, userIdentifier) {
-	$scope.go = function(path) {
-	  $location.path(path);
-	};
-
-	$scope.email = userIdentifier.currentUser.userName;
-	$scope.firstName = userIdentifier.currentUser.firstName;
-	$scope.lastName = userIdentifier.currentUser.lastName;
-	$scope.update = function() {
-		var newUserData = {
-			userName: $scope.email,
-			firstName: $scope.firstName,
-			lastName: $scope.lastName
-		}
-
-		userAuth.updateCurrentUser(newUserData).then(function() {
-			appNotifier.notify('Your user account has been updated.');
-		}, function(error) {
-			appNotifier.error(error);
-		})
-	}
-});*/
 myApp.config( function($routeProvider) {
-	var routeRoleChecks = {
-		admin: { auth: function(userAuth) {
-				return userAuth.authorizeCurrentUserForRoute('admin');
-			}
-		},
-		user: { auth: function(userAuth) {
-				return userAuth.authorizeAuthenticatedUserForRoute();
-			}
-		}
-	}
+
 	$routeProvider.when('/', {templateUrl: "/views/main.html", controller: "mainController"});
 	$routeProvider.when('/sendGreeting', {templateUrl: "/views/greetings.html", controller: "greetingController"});
 	$routeProvider.when('/gallery', {templateUrl: "/views/gallery.html", controller: "galleryController"});
-	$routeProvider.when('/gallery/admin', {templateUrl: "/views/gallery.html", controller: "galleryController"});
-	$routeProvider.when('/admin/users', {templateUrl: "/app/admin/user-list.html",
-		controller: "userListController", resolve: routeRoleChecks.admin
-	});
-	$routeProvider.when('/signup', {templateUrl: "/app/account/signup.html", controller: "signupController"});
-	$routeProvider.when('/profile', {templateUrl: "/app/account/profile.html",
-		controller: "profileController", resolve: routeRoleChecks.user});
+	$routeProvider.when('/adminGallery', {templateUrl: "/views/gallery.html", controller: "galleryController"});
+
 });
 
 myApp.run(function($rootScope, $location) {
